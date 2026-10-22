@@ -1,0 +1,18 @@
+name: Build Kernel
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential libncurses-dev bison flex libssl-dev libelf-dev bc
+      - name: Configure kernel
+        run: make defconfig
+      - name: Build kernel image
+        run: make -j$(nproc) bzImage
+      - name: Upload kernel artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernex-bzimage
+          path: arch/x86/boot/bzImage
