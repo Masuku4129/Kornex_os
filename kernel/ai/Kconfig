@@ -1,0 +1,5 @@
+config KERNEX_AI
+bool "Kernex OS In-Kernel Integer Perceptron AI Subsystem"
+default y
+help
+  Enables the native in-kernel integer perceptron engine for system telemetry analysis.
